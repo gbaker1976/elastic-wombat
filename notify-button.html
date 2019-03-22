@@ -1,96 +1,145 @@
 <style type="text/css">
-  @keyframes input-grow {
-    from {
-      width: 0;
-    }
+	:root {
+		--highlight-color: green;
+		--highlight-text-color: white;
+		--entry-input-background: white;
 
-    to {
-      width: 200px;
-    }
-  }
+		--body-background: black;
 
-  @keyframes fade-out {
-    from {
-      opacity: 1;
-    }
+		--animation-duration-short: 0.2s;
+		--animation-duration-medium: 0.7s;
+		--animation-duration-long: 1.5s;
+		--animation-delay-short: 0.3s;
+		--animation-delay-medium: 0.7s;
+		--animation-delay-long: 1.5s;
 
-    to {
-      opacity: 0;
-      display: none;
-    }
-  }
+		--icon-send: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iMTIwMCIgaGVpZ2h0PSIxMjAwIiB2aWV3Qm94PSIwIDAgMTIwMCAxMjAwIj48Zz48ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSg2MDAgNjAwKSBzY2FsZSgwLjY5IDAuNjkpIHJvdGF0ZSgwKSB0cmFuc2xhdGUoLTYwMCAtNjAwKSIgc3R5bGU9ImZpbGw6I0ZGRkZGRiI+PHN2ZyBmaWxsPSIjRkZGRkZGIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB2ZXJzaW9uPSIxLjEiIHg9IjBweCIgeT0iMHB4IiB2aWV3Qm94PSIwIDAgMzAuNTUyIDI5LjYzNSIgc3R5bGU9ImVuYWJsZS1iYWNrZ3JvdW5kOm5ldyAwIDAgMzAuNTUyIDI5LjYzNTsiIHhtbDpzcGFjZT0icHJlc2VydmUiPjxnPjxwYXRoIGQ9Ik0wLjgzOCwxNS4wMDdjLTEuMTU3LDAuNjA3LTEuMTA5LDEuNDk2LDAuMTA0LDEuOTc2bDMuNTk0LDEuNDIyYzEuMjE0LDAuNDgyLDMuMDUxLDAuMjE5LDQuMDgtMC41ODRMMjQuMjIzLDUuNTEzICAgYzEuMDI2LTAuODA3LDEuMTM2LTAuNjg4LDAuMjQ1LDAuMjY2TDEyLjEzLDE4Ljk4NWMtMC44OTQsMC45NTEtMC42MywyLjExOSwwLjU4OCwyLjU5bDAuNDIxLDAuMTY0ICAgYzEuMjE4LDAuNDcxLDMuMjAzLDEuMjYyLDQuNDEzLDEuNzU0bDMuOTg2LDEuNjIzYzEuMjExLDAuNDkyLDIuNTA1LTAuMDg4LDIuODQ5LTEuMzQ4bDYuMDc1LTIyLjMzICAgYzAuMzQzLTEuMjYtMC4zMjMtMS43OTUtMS40OC0xLjE4OUwwLjgzOCwxNS4wMDd6Ij48L3BhdGg+PHBhdGggZD0iTTEwLjcwMSwyOS42MjZjLTAuMDcxLDAuMjEzLDIuNDU4LTMuNjYyLDIuNDU4LTMuNjYyYzAuNzE1LTEuMDkyLDAuMzA5LTIuMzk1LTAuODk5LTIuODg5bC0yLjc1OC0xLjEyOSAgIGMtMS4yMDgtMC40OTQtMS43ODcsMC4wODYtMS4yODcsMS4yOTNDOC4yMTUsMjMuMjM5LDEwLjc3NCwyOS40MDcsMTAuNzAxLDI5LjYyNnoiPjwvcGF0aD48L2c+PC9zdmc+PC9nPjwvZz48L3N2Zz4=");
+	}
 
-  @keyframes resize {
-    from {
-      width: 6em;
-      height: 2.5em;
-    }
+	@keyframes input-grow {
+		from {
+			width: 0;
+		}
 
-    to {
-      width: 2.5em;
-      height: 2.5em;
-    }
-  }
+		to {
+			width: 200px;
+		}
+	}
 
-  body {
-   background: black;
-  }
+	@keyframes input-shrink {
+		from {
+			width: 200px;
+		}
 
-  .notify-button * {
-    outline: none;
-  }
+		to {
+			width: 0;
+		}
+	}
 
-  .notify-button {
-    border-radius: 100px;
-    line-height: 1.5em;
-    background: white;
-    padding: 0.5em;
-    display: inline-grid;
-    cursor: pointer;
-  }
+	@keyframes fade-out {
+		from {
+			opacity: 1;
+		}
 
-  .notify-button button {
-    border: none;
-    border-radius: 100px;
-    line-height: inherit;
-    grid-column: 2;
-    grid-row: 1;
-    text-align: center;
-    display: block;
-  }
+		to {
+			opacity: 0;
+			display: none;
+		}
+	}
 
-  .notify-button input {
-    width: 0;
-    border: none;
-    display: none;
-    grid-column: 1;
-    grid-row: 1;
-  }
+	@keyframes fade-in {
+		from {
+			opacity: 0;
+		}
 
-  .notify-button.active button span {
-    animation: 0.5s fade-out ease-in-out forwards;
-  }
+		to {
+			opacity: 1;
+			display: static;
+		}
+	}
 
-  .notify-button.active button {
-    background-color: black;
-    color: white;
-  }
+	@keyframes input-iconify {
+		from {
+			width: 6em;
+			height: 2.5em;
+		}
 
-  .notify-button.active.end button {
-    background-color: black;
-    color: white;
-    background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iMTIwMCIgaGVpZ2h0PSIxMjAwIiB2aWV3Qm94PSIwIDAgMTIwMCAxMjAwIj48Zz48ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSg2MDAgNjAwKSBzY2FsZSgwLjY5IDAuNjkpIHJvdGF0ZSgwKSB0cmFuc2xhdGUoLTYwMCAtNjAwKSIgc3R5bGU9ImZpbGw6I0ZGRkZGRiI+PHN2ZyBmaWxsPSIjRkZGRkZGIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB2ZXJzaW9uPSIxLjEiIHg9IjBweCIgeT0iMHB4IiB2aWV3Qm94PSIwIDAgMzAuNTUyIDI5LjYzNSIgc3R5bGU9ImVuYWJsZS1iYWNrZ3JvdW5kOm5ldyAwIDAgMzAuNTUyIDI5LjYzNTsiIHhtbDpzcGFjZT0icHJlc2VydmUiPjxnPjxwYXRoIGQ9Ik0wLjgzOCwxNS4wMDdjLTEuMTU3LDAuNjA3LTEuMTA5LDEuNDk2LDAuMTA0LDEuOTc2bDMuNTk0LDEuNDIyYzEuMjE0LDAuNDgyLDMuMDUxLDAuMjE5LDQuMDgtMC41ODRMMjQuMjIzLDUuNTEzICAgYzEuMDI2LTAuODA3LDEuMTM2LTAuNjg4LDAuMjQ1LDAuMjY2TDEyLjEzLDE4Ljk4NWMtMC44OTQsMC45NTEtMC42MywyLjExOSwwLjU4OCwyLjU5bDAuNDIxLDAuMTY0ICAgYzEuMjE4LDAuNDcxLDMuMjAzLDEuMjYyLDQuNDEzLDEuNzU0bDMuOTg2LDEuNjIzYzEuMjExLDAuNDkyLDIuNTA1LTAuMDg4LDIuODQ5LTEuMzQ4bDYuMDc1LTIyLjMzICAgYzAuMzQzLTEuMjYtMC4zMjMtMS43OTUtMS40OC0xLjE4OUwwLjgzOCwxNS4wMDd6Ij48L3BhdGg+PHBhdGggZD0iTTEwLjcwMSwyOS42MjZjLTAuMDcxLDAuMjEzLDIuNDU4LTMuNjYyLDIuNDU4LTMuNjYyYzAuNzE1LTEuMDkyLDAuMzA5LTIuMzk1LTAuODk5LTIuODg5bC0yLjc1OC0xLjEyOSAgIGMtMS4yMDgtMC40OTQtMS43ODcsMC4wODYtMS4yODcsMS4yOTNDOC4yMTUsMjMuMjM5LDEwLjc3NCwyOS40MDcsMTAuNzAxLDI5LjYyNnoiPjwvcGF0aD48L2c+PC9zdmc+PC9nPjwvZz48L3N2Zz4=");
-      background-size: 2em;
-      background-position: 2px 3px;
-      background-repeat: no-repeat;
-      animation: 0.3s resize ease-in-out forwards;
-  }
+		to {
+			width: 2.5em;
+			height: 2.5em;
+		}
+	}
 
-  .notify-button.active input {
-    display: inline;
-    width: 0;
-    animation: input-grow 0.5s ease-in-out forwards;
-  }
+	@keyframes grow-glow {
+		from {}
+
+		to {
+			box-shadow: 0 0 20px 10px var(--highlight-color);
+		}
+	}
+
+	body {
+	 background: var(--body-background);
+	 text-align: center;
+	}
+
+	.notify-button * {
+		outline: none;
+	}
+
+	.notify-button {
+		border-radius: 100px;
+		line-height: 1.5em;
+		background: var(--entry-input-background);
+		padding: 0.5em;
+		display: inline-grid;
+		cursor: pointer;
+	}
+
+	.notify-button button {
+		border: none;
+		border-radius: 100px;
+		line-height: inherit;
+		grid-column: 2;
+		grid-row: 1;
+		text-align: center;
+		display: block;
+	}
+
+	.notify-button input {
+		width: 0;
+		border: none;
+		display: none;
+		grid-column: 1;
+		grid-row: 1;
+	}
+
+	.notify-button.active {
+		animation: var(--animation-duration-short) grow-glow ease-in-out forwards;
+	}
+
+	.notify-button.active button span {
+		animation: var(--animation-duration-short) fade-out var(--animation-delay-short) ease-in-out forwards;
+	}
+
+	.notify-button.active button {
+		background-color: var(--highlight-color);
+		color: var(--highlight-text-color);
+	}
+
+	.notify-button.active.end button {
+		background-image: var(--icon-send);
+		background-size: 2em;
+		background-position: 2px 3px;
+		background-repeat: no-repeat;
+		animation: var(--animation-duration-short) input-iconify ease-in-out forwards;
+	}
+
+	.notify-button.active input {
+		display: inline;
+		width: 0;
+		animation: var(--animation-duration-short) input-grow var(--animation-delay-short) ease-in-out forwards;
+	}
 </style>
 
 <div data-control="notify-button" class="notify-button">
